@@ -1,0 +1,72 @@
+{
+  "name": "SimplySecureSign",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "build": "react-app-rewired build",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
+    "lint-sass": "sass-lint -c .sass-lint.yml 'src/styles/**/*.scss' -v -q",
+    "posttest": "npm run lint",
+    "serve:dist": "webpack-dev-server --open --env dist -p --progress",
+    "start": "react-app-rewired start eslint ./src",
+    "eject": "react-app-rewired eject"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "^4.0.2",
+    "@fullcalendar/daygrid": "^4.0.1",
+    "@fullcalendar/react": "^4.0.2-beta",
+    "@material-ui/core": "^3.9.0",
+    "@material-ui/icons": "3.0.2",
+    "@tweenjs/tween.js": "^16.6.0",
+    "connected-react-router": "^4.5.0",
+    "date-fns": "^2.0.0-alpha.21",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
+    "qs": "^6.5.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "4.8.4",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.1.0",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "typescript": "^3.4.5",
+    "url-loader": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-module-resolver": "^3.1.3",
+    "babel-plugin-root-import": "6.1.0",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "babel-runtime": "^6.26.0",
+    "node-sass": "^4.12.0",
+    "react-app-rewire-aliases": "^0.2.0",
+    "react-app-rewired": "^2.1.3",
+    "react-scripts": "^3.0.0",
+    "sass-lint": "1.12.1",
+    "sass-loader": "7.1.0"
+  },
+  "eslintIgnore": [
+    "src/**"
+  ],
+  "engines": {
+    "node": ">=6.9.0",
+    "npm": ">= 3"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

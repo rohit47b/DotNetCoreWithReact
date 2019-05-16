@@ -1,0 +1,31 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "strict",
+        "strict/browser",
+        "strict/mocha"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": "off",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-cond-assign": [
+            "error",
+            "always"
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ]
+    }
+}

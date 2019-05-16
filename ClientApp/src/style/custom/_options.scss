@@ -1,0 +1,155 @@
+.card-tab{
+    .card-header{
+        padding-bottom: 0px !important;
+    }
+    .card-body{
+        .checkbox-info{
+            margin-top: 14px;
+            span{
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.tab-nav-2{
+    background-color: $color_gray6;
+    -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    min-height: 40px !important;
+    .tab-nav-item-2{
+        font-size: 13px !important;
+        min-height: 40px;
+        text-transform: capitalize !important;
+        min-width: 120px !important;
+        color: $color_gray1;
+        opacity: 1;
+        >span>span{
+            padding: 6px 12px !important;
+        }
+        svg{
+            font-size: 16px;
+            position: relative;
+            top: 2px;
+        }
+    }
+    >div >div >div{
+        +span{
+            display: none
+        }
+    }
+    .tab-nav-item-2[aria-selected ="true"]{
+        background-color: $text_primary;
+        >span>span>span{
+            color: #fff !important;
+            
+        }
+    }
+}
+.tab-content{
+    border: 1px solid $color_gray7;
+    padding: 24px;
+    .content-box{
+        min-height: 55vh;
+    }
+    .custom-label{
+        font-size: 12px;
+    }
+    .no-label > div {
+        margin-top: 10px !important;
+    }
+    
+    .left-side-nav{
+        border-right: 1px solid $color_gray7;
+        min-height: 55vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .search-box{
+            border-bottom: 1px solid $color_gray7;
+            .search-text-field{
+                margin: 0px !important;
+                padding: 5px 20px;
+               .search-icon{
+                font-size: 16px;
+                color: $color_gray7;
+               }
+                input{
+                    font-size: 13px;
+                   
+                }
+                >div{
+                    &:before{
+                        display: none;
+                    }
+                    &:after{
+                        display: none;
+                    }
+                }
+            }
+        }
+        .left-side-menu{
+            .left-side-menu-item{
+                >span{
+                    padding: 0px;
+                    svg{
+                        font-size: 18px;
+                    }
+                }
+                .left-side-menu-text{
+                    >span{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+    .right-side-content{
+        .top-header{
+            border-bottom: 1px solid $color_gray7;
+            padding: 7px 20px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            .top-title{
+                -webkit-box-flex: 1;
+                    -ms-flex-positive: 1;
+                        flex-grow: 1;
+                font-weight: 600;
+            }
+            .btn-sm {
+                padding: 2px 16px !important;
+            }
+        }
+        .sec-form{
+            padding: 20px;
+        }
+    }
+    .footer-btn{
+        border-top: 1px solid $color_gray7;
+        padding: 20px 20px;
+    }
+}
+
+.list-charges-items{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 10px;
+    color: #000000;
+    font-size: 13px;
+    .list-charges-title{
+        min-width: 240px;
+    }
+    .form-control-custom{
+        margin-bottom: 0px;
+        input{
+            min-height: 18px;
+        }
+    }
+}

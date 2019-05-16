@@ -1,0 +1,109 @@
+.section-verify{
+    overflow: hidden;
+    .verify-bg{
+        background-image: url('/assets/images/bg-login.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        img{
+            width: auto;
+        }
+    }
+    .verify-form{
+        background-color: #fff;
+        padding: 7% 5%;
+        overflow: auto;
+        height: 100%;
+    }
+}
+
+.pdf-box{
+    -webkit-box-shadow: 0 0 10px 0 #ddd !important;
+            box-shadow: 0 0 10px 0 #ddd !important;
+    .bg-gray{
+        padding: 10px;
+    }
+    .pdf-sec{
+        padding: 15px;
+        .left-panel{
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 700px;
+            text-align: center;
+            margin: 0 auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+        }
+        .pdf-doc{
+            ul{
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                li {
+                    a, button {
+                        -webkit-box-shadow: 0 0 10px 0 #ddd;
+                                box-shadow: 0 0 10px 0 #ddd;
+                        min-height: 140px;
+                        width: 115px;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: center;
+                            -ms-flex-align: center;
+                                align-items: center;
+                        -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                                justify-content: center;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                                flex-direction: column;
+                        margin-bottom: 10px;
+                        position: relative;
+                        img{
+                            width: 100%;
+                        }
+                        .num-count{
+                            position: absolute;
+                            left: -10px;
+                            top: 45%;
+                        }
+                    }
+                    a.active, button.active{
+                        border: 1px solid $text_primary;
+                        svg{
+                            position: absolute;
+                            right: 0;
+                            bottom: 0;
+                            color: $text_danger;
+                        }
+                    }
+                   
+                }
+            }
+        }
+        .pdf-img{
+            img{
+                width: 100%;
+            }
+        }
+    }
+   
+}

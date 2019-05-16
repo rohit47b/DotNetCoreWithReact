@@ -1,0 +1,139 @@
+.top-gray-bg{
+    background-color: rgba(0,0,0,0.1);
+    min-height: 110px;
+    padding-top: 15px;
+}
+.card-container{
+    position: relative;
+    top: -50px;
+}
+
+.card-white {
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.2)  !important;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.2)  !important;
+    border-radius: 0 !important;
+}
+.stepper{
+    padding: 24px 0 !important;
+    .step-item.completed{
+        svg{
+            color: $text_danger !important;
+        }
+        .step-label{
+            >span{
+                + span{
+                    >span{
+                        color: $text_danger;
+                    }
+                }
+            }
+        }
+    }
+    .step-item{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        z-index: 100;
+        > div{
+            left: calc(-96% + 7px) !important;
+            right: calc(92% + 9px) !important;
+            span{
+                border-top-width: 3px !important;
+                border-color: $color_gray7 !important;
+            }
+        }
+        .step-label{
+            position: relative;
+            -webkit-box-align: start !important;
+                -ms-flex-align: start !important;
+                    align-items: flex-start !important;
+            >span{
+                + span{
+                    width: auto !important;
+                    position: absolute;
+                    top: 20px;
+                    left: 25px;
+                    >span{
+                        margin-top: 0 !important;
+                        font-size: 12px;
+                    }
+                }
+            } 
+        }
+    }
+    .step-item.un-complete{
+        svg{
+            color: $text_primary !important;
+        }
+        .step-label{
+            >span{
+                + span{
+                    >span{
+                        color: $text_primary !important;
+                    }
+                }
+            }
+        }
+    }
+    .step-item.step-next{
+        svg{
+            color: $color_gray7 !important;
+        }
+        .step-label{
+            >span{
+                + span{
+                    >span{
+                        color: $color_gray7 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.package-details {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    .media{
+        padding-right: 50px;
+    }
+}
+
+.card-container{
+    .card-white {
+            .card-content{
+            .right-content{
+                position: relative;
+                &:before{
+                    content: "";
+                    background-color: #eee;
+                    display: block;
+                    height: 100vh;
+                    position: absolute;
+                    left: 0;
+                    width: 2px;
+                    top: 0px;  
+                }
+            }
+            .fnt-aws-icon{
+                color: #535353;
+            }
+        }
+    }
+}
+
+.signer-info{
+    .signer-details{
+        padding-bottom: 10px;
+        span{
+            font-size: 13px;
+        }
+        span.title {
+            min-width: 150px;
+            display: inline-block;
+        }
+    }
+}

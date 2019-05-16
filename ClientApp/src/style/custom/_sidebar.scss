@@ -1,0 +1,62 @@
+.sidebar{    
+    .sidebar-drawer{
+        z-index: 1 !important;
+        .sidebar-menu{
+            padding-top: 0px;
+            padding-bottom: 15px;
+            .menu-item{
+                padding-top: 20px;
+                padding-bottom: 20px;
+                padding-left: 27px;
+                border-bottom: 1px solid #ddd;
+                .menu-icon{
+                    svg,span{
+                        font-size: 18px;
+                    }
+                }
+                .menu-title{
+                    >span{
+                        font-size: 15px;
+                        color: $color_gray1;
+                        font-weight: 600;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+                
+            }
+            .menu-item.active{
+                background-color: $color_gray2;
+                .menu-icon{
+                    svg,span{
+                        color:$color_white;
+                    }
+                }
+                .menu-title{
+                    span{
+                        color:$color_white;
+                    }
+                }
+            }
+            .submenu-list{
+              background-color:$color_gray3; 
+            }
+        }
+    }
+}
+.chat-count {
+    .circle {
+        background-color: #e31837;
+        border: 1px solid #e31837;
+        color: #fff;
+        // position: absolute;
+        // right: 15px;
+        height: 27px;
+        width: 27px;
+        margin-right: 15px;
+        display: flex;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+    }
+}

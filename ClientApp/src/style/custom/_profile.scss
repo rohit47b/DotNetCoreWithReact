@@ -1,0 +1,55 @@
+.profile-info{
+    .heading-small{
+        border-bottom: 1px solid $color_gray2;
+        padding-bottom: 15px;
+        margin-bottom: 20px !important;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        .icon-box{
+            margin-left: 10px;
+            svg{
+                font-size: 24px;
+                color: $text_primary;
+            }
+        }
+    }
+    .password-info{
+        p{
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+    }
+}
+.add-pro-code {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    .form-control-custom{
+        margin-bottom: 0;
+        input{
+            background-color: $color_gray9 !important;
+            text-align: center;
+            border-radius: 0px;
+            padding: 11px 12px 4px;
+            &::-webkit-input-placeholder{
+                opacity: 0.5;
+            }
+            &:-ms-input-placeholder{
+                opacity: 0.5;
+            }
+            &::-ms-input-placeholder{
+                opacity: 0.5;
+            }
+            &::placeholder{
+                opacity: 0.5;
+            }
+        }
+    }
+}

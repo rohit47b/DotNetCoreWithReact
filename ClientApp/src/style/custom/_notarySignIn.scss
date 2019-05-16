@@ -1,0 +1,10 @@
+.panel-foo-line{
+    &:before{
+        content: "";
+        background-color: #E31837;
+        height: 5px;
+        display: block;
+        width: 40%;
+        margin-bottom: 20px;
+    }
+}
