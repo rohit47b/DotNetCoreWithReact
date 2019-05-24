@@ -51,7 +51,7 @@ class IDTypes extends PureComponent {
     render() {
         const {open}=this.state
         return (
-            <Typography className="tab-container" component="div">
+            <Typography className="tab-container text-center-mb" component="div">
                 <div style={{ minHeight: "60vh" }}>
                     <Grid container spacing={16}>
                         <Grid item xs={12} sm={12}>

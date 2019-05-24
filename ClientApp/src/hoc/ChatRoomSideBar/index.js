@@ -356,6 +356,7 @@ class ChatRoomSideBar extends PureComponent {
                                     secondary={secondary ? 'Secondary text' : null}
                                 />
                                 <ListItemSecondaryAction>
+                                <div className="count">2</div>
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -373,7 +374,6 @@ class ChatRoomSideBar extends PureComponent {
                                     secondary={secondary ? 'Secondary text' : null}
                                 />
                                 <ListItemSecondaryAction>
-                                    <div className="count">2</div>
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <ListItem className="list-item">
@@ -449,6 +449,7 @@ class ChatRoomSideBar extends PureComponent {
                                     secondary={secondary ? 'Secondary text' : null}
                                 />
                                 <ListItemSecondaryAction>
+                                    <div className="count">2</div>
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -466,7 +467,7 @@ class ChatRoomSideBar extends PureComponent {
                                     primary="Kendall Sample"
                                     secondary={secondary ? 'Secondary text' : null}
                                 />
-                                <ListItemSecondaryAction>
+                               <ListItemSecondaryAction>
                                     <div className="count">2</div>
                                 </ListItemSecondaryAction>
                             </ListItem>

@@ -10,7 +10,7 @@ class Products extends PureComponent {
     render() {
         return (
             <Typography className="tab-container" component="div">
-                <div style={{ minHeight: "60vh" }}>
+                <div className="min-height-60">
                     <Grid container className="mrB15">
                         <Grid item xs={12} sm={6}>
                             <Typography className="heading-small mrB15" component="div">

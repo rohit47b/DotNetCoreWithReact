@@ -43,6 +43,7 @@ class Welcome extends PureComponent {
         name: 'hai',
         labelWidth: 0,
         value: 0,
+        errors: {}
     }
 
     handleChange = event => {
@@ -52,8 +53,47 @@ class Welcome extends PureComponent {
         this.setState({ value });
     };
 
+    handleValidation = (e) => {
+
+        let errors = {}
+
+        let name = e.target.name
+        if (name === 'firstname' && e.target.value.trim().length === 0) {
+            errors.firstname = 'First Name is required!'
+        }
+
+        if (name === 'lastname' && e.target.value.trim().length === 0) {
+            errors.lastname = 'Last Name is required!'
+        }
+
+        if (name === 'mobile' && e.target.value.trim().length === 0) {
+            errors.mobile = 'Mobile Number is required!'
+        }
+
+        if (name === 'email' && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)) {
+            errors.email = 'Invalid email address'
+        }
+
+        if (name === 'country') {
+            this.setState({ [e.target.name]: e.target.value });
+        }
+        if (name === 'country' && e.target.value === "") {
+            errors.country = 'Country is required!'
+        }
+        if (name === 'idType') {
+            this.setState({ [e.target.name]: e.target.value });
+        }
+        if (name === 'idType' && e.target.value === "") {
+            errors.idType = 'Id Type is required!'
+        }
+
+        this.setState({
+            errors
+        })
+    }
+
     render() {
-        const { value } = this.state
+        const { value, errors } = this.state
         return (
             <div>
                 <Grid container justify="center" className="top-gray-bg">
@@ -61,8 +101,8 @@ class Welcome extends PureComponent {
                         <Grid container>
                             <Grid item xs={6} sm={6} className="d-flex align-item-end">
                                 <Typography className="heading-large" gutterBottom variant="h5" component="h3">
-                                    eSign wizard / <span className="font-normal">Welcome</span>  <span><HelpIcon style={{ fontSize: 16,color:"#0073CF",cursor:"pointer" }}/></span>
-                               </Typography>
+                                    eSign wizard / <span className="font-normal">Welcome</span>  <span><HelpIcon style={{ fontSize: 16, color: "#0073CF", cursor: "pointer" }} /></span>
+                                </Typography>
                             </Grid>
                             <Grid item xs={6} sm={6} className="text-right">
                                 <Button title="Save & Continue" onClick={() => history.push('/app/eSign-wizard/signing-room')} variant="contained" color="primary" className="btn btn-common btn-blue">
@@ -91,7 +131,7 @@ class Welcome extends PureComponent {
                                     Welcome ro Closing Room Wizard.
                                 </Typography>
                                 <Typography className="mrB20 fnt-13" component="p">
-                                The wizard will guide you through the process of notarizing closing documents. The closing Room Wizard will walk the Notary and signer through the process of signing and notarization the closing documents as well as gathering the way the signer is identified to be entered into the notaries electronic journal.
+                                    The wizard will guide you through the process of notarizing closing documents. The closing Room Wizard will walk the Notary and signer through the process of signing and notarization the closing documents as well as gathering the way the signer is identified to be entered into the notaries electronic journal.
                                 </Typography>
 
                                 <Grid container spacing={16}>
@@ -105,35 +145,37 @@ class Welcome extends PureComponent {
                                             <Grid container spacing={16} className="mrB15">
                                                 <Grid item xs={12} sm={4}>
                                                     <TextField
-                                                        name="fname"
-                                                        label="First Name"
+                                                        name="firstname"
+                                                        label={<span>First Name <b>*</b></span>}
                                                         margin="dense"
                                                         variant="filled"
-                                                        className="text-field-dense"
+                                                        onChange={this.handleValidation}
+                                                        className={errors.firstname ? "text-field-dense text-error-border" : 'text-field-dense'}
                                                         type="text"
                                                     />
-                                                    
+                                                    {errors.firstname && <div className="validation-error text-right"> Please enter a valid first name </div>}
                                                 </Grid>
                                                 <Grid item xs={12} sm={4}>
                                                     <TextField
-                                                         name="mname"
+                                                        name="mname"
                                                         label="Middle Name"
                                                         margin="dense"
                                                         variant="filled"
                                                         className="text-field-dense"
                                                         type="text"
                                                     />
-                                                     <div className="validation-error text-right">Middle enter a valid middle name</div>
                                                 </Grid>
                                                 <Grid item xs={12} sm={4}>
                                                     <TextField
-                                                         name="lname"
-                                                        label="Last Name"
+                                                        name="lastname"
+                                                        label={<span>Last Name <b>*</b></span>}
                                                         margin="dense"
                                                         variant="filled"
-                                                        className="text-field-dense"
+                                                        onChange={this.handleValidation}
+                                                        className={errors.lastname ? "text-field-dense text-error-border" : 'text-field-dense'}
                                                         type="text"
                                                     />
+                                                    {errors.lastname && <div className="validation-error text-right"> Please enter a valid last name </div>}
                                                 </Grid>
                                             </Grid>
 
@@ -151,22 +193,26 @@ class Welcome extends PureComponent {
                                                 <Grid item xs={12} sm={4}>
                                                     <TextField
                                                         name="mobile"
-                                                        label="Mobile"
+                                                        label={<span>Mobile <b>*</b></span>}
                                                         margin="dense"
                                                         variant="filled"
-                                                        className="text-field-dense"
+                                                        onChange={this.handleValidation}
+                                                        className={errors.mobile ? "text-field-dense text-error-border" : 'text-field-dense'}
                                                         type="text"
                                                     />
+                                                     {errors.mobile && <div className="validation-error text-right"> Please enter a mobile number </div>}
                                                 </Grid>
                                                 <Grid item xs={12} sm={4}>
                                                     <TextField
-                                                        label="Email id"
+                                                        name="email"
+                                                        label={<span>Email id <b>*</b></span>}
                                                         margin="dense"
                                                         variant="filled"
-                                                        className="text-field-dense"
+                                                        onChange={this.handleValidation}
+                                                        className={errors.email ? "text-field-dense text-error-border" : 'text-field-dense'}
                                                         type="email"
-                                                        name="email"
                                                     />
+                                                    {errors.email && <div className="validation-error text-right"> Please enter a valid email id </div>}
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={16} className="mrB15">
@@ -279,23 +325,23 @@ class Welcome extends PureComponent {
                                                 <Grid container spacing={16}>
                                                     <Grid item xs={12} sm={6}>
                                                         <Typography className="fnt-13 mrB5" component="p">
-                                                             Signer's Signature
+                                                            Signer's Signature
                                                         </Typography>
                                                         <div className="border-box">
                                                             <div className="icon-box">
-                                                                <DoneIcon className="fnt-16 add-circle-icon"/>
-                                                                <EditIcon className="fnt-16 edit-circle-icon"/>
+                                                                <DoneIcon className="fnt-16 add-circle-icon" />
+                                                                <EditIcon className="fnt-16 edit-circle-icon" />
                                                             </div>
                                                         </div>
                                                     </Grid>
                                                     <Grid item xs={12} sm={6}>
                                                         <Typography className="fnt-13 mrB5" component="p">
-                                                             Initials
+                                                            Initials
                                                         </Typography>
                                                         <div className="border-box">
                                                             <div className="icon-box">
-                                                                <DoneIcon className="fnt-16 add-circle-icon"/>
-                                                                <EditIcon className="fnt-16 edit-circle-icon"/>
+                                                                <DoneIcon className="fnt-16 add-circle-icon" />
+                                                                <EditIcon className="fnt-16 edit-circle-icon" />
                                                             </div>
                                                         </div>
                                                     </Grid>

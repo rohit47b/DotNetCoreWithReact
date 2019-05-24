@@ -11,8 +11,9 @@ import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import Icon from '@material-ui/core/Icon';
 import MenuIcon from '@material-ui/icons/Menu';
-import classNames from 'classnames';
 
+import classNames from 'classnames';
+import history from 'customHistory'
 
 import APPCONFIG from 'constants/Config'
 
@@ -38,7 +39,7 @@ const styles = theme => ({
     }),
   },
   menuButton: {
-    marginLeft: 12,
+    marginLeft: 0,
   },
   hide: {
     display: 'none',
@@ -71,7 +72,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
-    marginLeft: '12px',
+    marginLeft: '0px',
     ...theme.mixins.toolbar,
   },
   content: {
@@ -138,7 +139,8 @@ class Header extends React.Component {
                 <img alt="logo" src={APPCONFIG.company_logo_path}/>
             </Typography>
             {auth && (
-              <div>
+              <div className="d-flex align-items-center">
+                <span className="icon-chat" onClick={() => history.push('/app/notary/closing-room/chat')}><i className="fa fa-comment-o" aria-hidden="true"></i></span>
                 <Icon  aria-haspopup="true"  aria-owns={open ? 'menu-appbar' : undefined} className="icon-account" onClick={this.handleMenu}>person_outline</Icon>
                 {/* <IconButton
                   aria-owns={open ? 'menu-appbar' : undefined}
@@ -162,7 +164,7 @@ class Header extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                  <MenuItem  onClick={() => history.push('/app/notary/profile-settings')}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
               </div>

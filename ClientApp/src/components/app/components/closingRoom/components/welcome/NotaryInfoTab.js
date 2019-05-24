@@ -10,6 +10,12 @@ import React, { PureComponent } from 'react';
 class NotaryInfoTab extends PureComponent {
     state = {
         value: 0,
+        name: "John Hancock",
+        commission: "212333",
+        country: "India",
+        state: "MP",
+        startDate: "01/05/2019",
+        endDate: "12/31/2019"
     }
 
     handleTabChange = (event, value) => {
@@ -17,7 +23,7 @@ class NotaryInfoTab extends PureComponent {
     }
 
     render() {
-        const { value } = this.state
+        const { value, name, commission, country, state, startDate, endDate } = this.state
         return (
             <Typography component="div" className="tab-content">
                 <form>
@@ -33,6 +39,7 @@ class NotaryInfoTab extends PureComponent {
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={name}
                                                 label="Name"
                                                 margin="dense"
                                                 variant="filled"
@@ -43,6 +50,7 @@ class NotaryInfoTab extends PureComponent {
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={commission}
                                                 label="Commission"
                                                 margin="dense"
                                                 variant="filled"
@@ -53,6 +61,7 @@ class NotaryInfoTab extends PureComponent {
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={country}
                                                 label="Country"
                                                 margin="dense"
                                                 variant="filled"
@@ -65,6 +74,7 @@ class NotaryInfoTab extends PureComponent {
                                     <Grid container spacing={16} className="mrB10">
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={state}
                                                 label="State"
                                                 margin="dense"
                                                 variant="filled"
@@ -75,6 +85,7 @@ class NotaryInfoTab extends PureComponent {
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={startDate}
                                                 label="Start date"
                                                 margin="dense"
                                                 variant="filled"
@@ -85,6 +96,7 @@ class NotaryInfoTab extends PureComponent {
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
                                             <TextField
+                                                value={endDate}
                                                 label="End date"
                                                 margin="dense"
                                                 variant="filled"

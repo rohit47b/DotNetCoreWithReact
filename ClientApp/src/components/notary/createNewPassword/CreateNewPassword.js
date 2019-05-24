@@ -10,9 +10,36 @@ import history from 'customHistory'
 class CreateNewPassword extends PureComponent {
     state = {
         emailId: 'jstreit@wwnotary.com',
+        errors: {}
+    }
+
+    handleValidation = (e) => {
+        let errors = {}
+        let name = e.target.name
+        if (
+            name === 'newPassword' &&
+            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+        ) {
+            errors.newPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+        } else {
+            delete errors.password
+        }
+        if (
+            name === 'confirmPassword' &&
+            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+        ) {
+            errors.confirmPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+        } else {
+            delete errors.password
+        }
+
+        this.setState({
+            errors
+        })
     }
 
     render() {
+        const { errors } = this.state
         return (
             <Grid item xs={12} sm={12} md={6} className="verify-form">
                 <Typography className="mrB20 heading-large" gutterBottom variant="h5" component="h2">
@@ -27,13 +54,15 @@ class CreateNewPassword extends PureComponent {
                                 placeholder="Enter new password"
                                 fullWidth
                                 margin="normal"
-                                className="bootstrap-text-field"
+                                onChange={this.handleValidation}
+                                className={errors.newPassword ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 type="password"
                                 name="newPassword"
                             />
+                            {errors.newPassword && <div className="validation-error text-right"> Please enter your name</div>}
                         </Grid>
                         <Grid item xs={12} sm={9}>
                             <TextField
@@ -42,13 +71,15 @@ class CreateNewPassword extends PureComponent {
                                 placeholder="Re-enter new password"
                                 fullWidth
                                 margin="normal"
-                                className="bootstrap-text-field"
+                                onChange={this.handleValidation}
+                                className={errors.confirmPassword ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 type="password"
                                 name="confirmPassword"
                             />
+                            {errors.confirmPassword && <div className="validation-error text-right"> Please enter your name</div>}
                         </Grid>
                     </Grid>
                     

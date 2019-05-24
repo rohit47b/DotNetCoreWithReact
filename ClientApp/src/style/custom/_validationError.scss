@@ -1,0 +1,32 @@
+.select-error-border{
+    font-size: 13px;
+    label{
+        +div{
+            border: 1px solid $text_danger !important;
+        }
+    }
+}
+
+.text-error-border{
+    label{
+        +div{
+            input{
+                border: 1px solid $text_danger !important;
+            }
+        }
+    }
+   
+}
+.password-error-border{
+    label{
+        + div{
+            border: 1px solid $text_danger !important;
+        }
+    }
+}  
+
+.bootstart-text-error-border{
+    input{
+        border: 1px solid $text_danger;
+    }
+}

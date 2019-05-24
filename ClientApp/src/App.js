@@ -48,6 +48,9 @@ import { RemoteSignRoute } from 'components/remoteSign/RemoteSignRoute';
 
 import { ClosingRoomWizardRoute } from 'components/app/components/closingRoom/ClosingRoomWizardRoute'
 
+import ViewerSignIn from 'components/viewer/signIn'
+import Welcome from 'components/viewer/welcome'
+import { ViewerSignRoute } from 'components/viewer/ViewerSignRoute';
 
 import './style/app.scss'
 
@@ -84,6 +87,9 @@ const Main = () => {
         
          <SidebarMainRoute exact path='/app/notary/options' component={Options} />
          <SidebarMainRoute exact path='/app/notary/profile-settings' component={ProfileSettings} />
+
+         <Route path='/viewer/sign-in' component={ViewerSignIn} />
+         <Route path='/viewer/welcome' component={Welcome} />
          
          <Route
             path="/app/notary/"
@@ -93,6 +99,12 @@ const Main = () => {
           <Route
             path="/app/remote-sign/"
             render={({ match: { url } }) => (RemoteSignRoute(url)
+            )}
+        />
+
+            <Route
+            path="/app/viewer/"
+            render={({ match: { url } }) => (ViewerSignRoute(url)
             )}
         />
          

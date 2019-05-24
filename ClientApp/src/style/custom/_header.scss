@@ -31,15 +31,28 @@
         }
     }
     .sidebar-menu{
-        .menu-item{
-            .menu-icon{
-                margin-right: 0px !important;
-            }
-        }
+       
         .submenu-list{
             .menu-item{
-                padding-left: 55px !important;
+                padding-left: 48px !important;
             }
         }
+        .submenu-list-level-2{
+            .menu-item{
+                padding-left: 78px !important;
+            }
+        }
+    }
+    
+}
+.menu-title{
+    padding: 0px 16px 0px 0px !important;
+} 
+
+.icon-chat{
+    cursor: pointer;
+    margin-right: 15px;
+    .fa{
+        font-size: 24px;
     }
 }

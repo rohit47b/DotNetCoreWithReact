@@ -4,71 +4,67 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Stepper from '@material-ui/core/Stepper';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import HelpIcon from '@material-ui/icons/Help';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import history from 'customHistory';
 import React, { PureComponent } from 'react';
+import RightSideBar from './RightSideBar';
+import ChatRoomMobileAction from './ChatRoomMobileAction';
 
-class ClosingRoomPdf extends PureComponent {
+const styles = theme => ({
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    [theme.breakpoints.down('sm')]: {
+        signClosingWizard: {
+            padding: '0 20px 0 20px',
+        },
+        heading: {
+            marginBottom: '20%',
+        }
+    },
+    pdR4: {
+        paddingRight: '4px !important'
+    }
+});
+
+class SigningRoom extends PureComponent {
 
     render() {
 
+        const { classes } = this.props;
+
         return (
-            <Card className="card card-room card-pdf">
-                <Typography className="card-header" component="div">
-                    <span className="card-title">
-                        Closing Room
-                        <HelpIcon />
-                    </span>
-                    <Button onClick={() => history.push('/app/notary/closing-room/info')} variant="contained" className="btn btn-gray mrR10">
-                        Back
-                     </Button>
-                    <Button onClick={() => history.push('/app/notary/closing-room/review')} variant="contained" className="btn btn-primary">
-                        Save & Continue
-                     </Button>
-                </Typography>
-                <CardContent className="card-body">
-                    <Grid container>
-                        <Grid item xs={12} sm={12} md={8}>
-                            <Stepper className="stepper mrB20" alternativeLabel>
-                                <Step className="step-item completed">
-                                    <StepLabel className="step-label">Signers & Notary Info</StepLabel>
-                                </Step>
-                                <Step className="step-item un-complete">
-                                    <StepLabel className="step-label">Signing Room</StepLabel>
-                                </Step>
-                                <Step className="step-item step-next">
-                                    <StepLabel className="step-label">Review & Submit</StepLabel>
-                                </Step>
-                            </Stepper>
-                        </Grid>
-                    </Grid>
-                    <Grid container>
-                        <Grid item xs={12} sm={12}>
-                            <Paper className="pdf-box" elevation={1}>
-                                <Grid container className="mrB10 pdf-top-title bg-gray align-items-center">
+            <Grid container>
+                <Grid item xs={12} sm={12} md={7} lg={8} xl={9} className={classes.signClosingWizard + " pdB0 wizard-container"}>
+                    <Paper className="wizard-header-text">
+                        <Typography variant="h5" component="h3">
+                            eSign wizard / Signing Room
+                        </Typography>
+                    </Paper>
+                    <Card>
+                        <CardContent className="card-content pdB0 pdT0">
+                            <Paper className="pdf-box pdf-box-padding remove-shadow pdB0" elevation={1}>
+                                <Grid container className="mrB10 bg-gray pdR20 pdL20 align-items-center">
                                     <Grid item xs={12} sm={12} md={3}>
                                         <Typography className="mr0 heading-small" variant="h5" component="h4">
                                             Kendall Sample
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={9} className="text-right">
-                                        <span className="fnt-12 mrR5 note-title">Documents to submits with :</span>
-                                        <Button className="btn btn-chip mrR5" variant="outlined" color="default">
+                                    <Grid item xs={12} sm={9} className="text-right document-header-mobile">
+                                        <span className="fnt-12 mrR5">Documents to submits with :</span>
+                                        <Button className={classes.pdR4 + " btn btn-chip mrR5"} variant="outlined" color="default">
                                             <span className="flex-grow-1 text-left ">Sign</span>  <Avatar className="avatar-count mrL5">00</Avatar>
                                         </Button>
-                                        <Button className="btn btn-chip" variant="outlined" color="default">
+                                        <Button className={classes.pdR4 + " btn btn-chip"} variant="outlined" color="default">
                                             <span className="flex-grow-1 text-left">Interaction</span>  <Avatar className="avatar-count mrL5">01</Avatar>
                                         </Button>
                                     </Grid>
                                 </Grid>
                                 <Grid container className="pdf-sec">
-                                    <Grid item xs={12} sm={12} md={3} className="col-left">
+                                    <Grid item xs={12} sm={12} md={3}>
                                         <div className="left-panel left-remote-sign">
                                             <div className="mrB15">
                                                 <Button className="btn btn-rounded btn-rounded-gray mrR5" variant="outlined" color="default">
@@ -100,13 +96,13 @@ class ClosingRoomPdf extends PureComponent {
                                                         </Button>
                                                     </li>
                                                     <li>
-                                                        <Button title="thumbnail4" >
+                                                        <Button title="thumbnail4">
                                                             <span className="num-count">04</span>
                                                             <img alt="thumbnail" src="/assets/images/th1.png" />
                                                         </Button>
                                                     </li>
                                                     <li>
-                                                        <Button title="thumbnail5" >
+                                                        <Button title="thumbnail5">
                                                             <span className="num-count">05</span>
                                                             <img alt="thumbnail" src="/assets/images/th3.png" />
                                                         </Button>
@@ -115,7 +111,7 @@ class ClosingRoomPdf extends PureComponent {
                                             </div>
                                         </div>
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={9} className="col-right right-panel">
+                                    <Grid item xs={12} sm={12} md={9} className="right-panel">
                                         <Grid container justify="center">
                                             <Grid item xs={12} sm={8}>
                                                 <div className="pdf-img">
@@ -126,12 +122,16 @@ class ClosingRoomPdf extends PureComponent {
                                     </Grid>
                                 </Grid>
                             </Paper>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-            </Card>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} sm={12} md={5} lg={4} xl={3} className="pdB0">
+                    <RightSideBar />
+                    <ChatRoomMobileAction/>
+                </Grid>
+            </Grid>
         )
     }
 }
 
-export default ClosingRoomPdf
+export default withStyles(styles)(SigningRoom)

@@ -9,6 +9,8 @@ import { withStyles } from '@material-ui/core/styles';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import InsertDriveFile from '@material-ui/icons/InsertDriveFile';
 import PermIdentity from '@material-ui/icons/PermIdentity';
+import ChatBubbleOutline from '@material-ui/icons/ChatBubbleOutline';
+
 import history from 'customHistory';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -18,7 +20,7 @@ import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
 
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const styles = theme => ({
   root: {
@@ -40,7 +42,7 @@ const styles = theme => ({
     }),
   },
   menuButton: {
-    marginLeft: 12,
+    marginLeft: 0,
     marginRight: 36,
   },
   hide: {
@@ -64,9 +66,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
+    width: 48,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
+      width: 48,
     },
   },
   toolbar: {
@@ -86,17 +88,30 @@ const styles = theme => ({
 class Sidebar extends PureComponent {
   state = {
     open: true,
+    openSubmenu:false
   };
 
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
   };
+
+  handleSubMenuClick= ()=>{
+    this.setState(state => ({ openSubmenu: !state.openSubmenu }));
+  }
+
+  goTo = (path) => {
+    const { toggleDrawerClose } = this.props
+    toggleDrawerClose()
+    history.push("/app/notary"+path)
+  }
+
   render() {
-    const { classes, isOpen} = this.props;
-    const {open} =this.state
+    const { classes, isOpen,toggleDrawerClose} = this.props;
+    const {open,openSubmenu} =this.state
     return (
       <div className="sidebar">
         <CssBaseline />
+         
         <Drawer
           className={classNames(classes.drawer + " sidebar-drawer", {
             [classes.drawerOpen]: isOpen,
@@ -127,36 +142,52 @@ class Sidebar extends PureComponent {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding className="submenu-list">
-                <ListItem button className="submenu menu-item" onClick={() => history.push('/app/notary/closing-room')}>
+                <ListItem button className="submenu menu-item" 
+                // onClick={() => history.push('/app/notary/closing-room')}
+                onClick={() => this.goTo('/closing-room')}
+                >
                   <ListItemIcon  className="menu-icon">
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText className="menu-title" inset primary="Closing Room1" />
                 </ListItem>
-                <ListItem button className="submenu menu-item">
+                <ListItem onClick={this.handleSubMenuClick} button className="submenu menu-item">
                   <ListItemIcon  className="menu-icon">
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText className="menu-title" inset primary="Closing Room2" />
                 </ListItem>
-                <ListItem button className="submenu menu-item">
-                  <ListItemIcon  className="menu-icon">
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText className="menu-title" inset primary="Closing Room3" />
-                </ListItem>
+                  <Collapse in={openSubmenu} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding className="submenu-list-level-2">
+                    <ListItem button className="submenu menu-item">
+                      <ListItemIcon  className="menu-icon">
+                        <StarBorder />
+                      </ListItemIcon>
+                      <ListItemText className="menu-title" inset primary="Closing Room3" onClick={toggleDrawerClose}/>
+                    </ListItem>
+                    </List>
+                  </Collapse>
               </List>
             </Collapse>
-            <ListItem onClick={() => history.push('/app/notary/options')} button className="menu-item">
+            <ListItem 
+              // onClick={() => history.push('/app/notary/options')} 
+              onClick={() => this.goTo('/options')}
+              button className="menu-item">
               <ListItemIcon className="menu-icon"> <Icon>settings</Icon></ListItemIcon>
               <ListItemText className="menu-title" primary={"Options"} />
             </ListItem>
-            <ListItem onClick={() => history.push('/app/notary/profile-settings')} button className="menu-item">
+            <ListItem 
+              // onClick={() => history.push('/app/notary/profile-settings')} 
+              onClick={() => this.goTo('/profile-settings')}
+              button className="menu-item">
               <ListItemIcon className="menu-icon"><PermIdentity /></ListItemIcon>
               <ListItemText className="menu-title" primary={"Profile Settings"} />
             </ListItem>
-            <ListItem onClick={() => history.push('/app/notary/closing-room/chat')} button className="menu-item">
-              <ListItemIcon className="menu-icon"><i className="fa fa-comment-o" aria-hidden="true"></i></ListItemIcon>
+            <ListItem 
+              // onClick={() => history.push('/app/notary/closing-room/chat')} 
+              onClick={() => this.goTo('/closing-room/chat')}
+              button className="menu-item">
+              <ListItemIcon className="menu-icon"><ChatBubbleOutline/></ListItemIcon>
               <ListItemText className="menu-title chat-count" >
                 <span className="flex-grow-1">Chat</span><span className="circle">2</span>
               </ListItemText>

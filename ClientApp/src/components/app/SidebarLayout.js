@@ -58,7 +58,7 @@ class SidebarLayout extends React.Component {
           <div className="app-content-wrapper">
           <div className={classes.root + " page-content"}>
                 <Sidebar isOpen={open} toggleDrawerClose={this.handleDrawerClose} />
-                <main className={classes.content + " main-content main-content-shadow"}>
+                <main className={classes.content + " main-content main-content-shadow"} onClick={this.handleDrawerClose}>
                     <div className={classes.toolbar} />
                     {children}
                 </main>

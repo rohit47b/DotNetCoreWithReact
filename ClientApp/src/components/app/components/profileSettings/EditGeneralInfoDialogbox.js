@@ -15,11 +15,12 @@ import TextField from '@material-ui/core/TextField'
 class EditGeneralInfoDialogbox extends PureComponent {
     state = {
         city: '',
-        state:'',
-        country:'',
+        state: '',
+        country: '',
         name: 'hai',
         labelWidth: 0,
         value: 0,
+        errors: {}
     }
 
     handleChange = event => {
@@ -34,10 +35,46 @@ class EditGeneralInfoDialogbox extends PureComponent {
         this.setState({ [prop]: event.target.value });
     };
 
+    handleValidation = (e) => {
+        let errors = {}
+        let name = e.target.name
+        if (name === 'firstname' && e.target.value.trim().length === 0) {
+            errors.firstname = 'First Name is required!'
+        }
+
+        if (name === 'lastname' && e.target.value.trim().length === 0) {
+            errors.lastname = 'Last Name is required!'
+        }
+
+        if (name === 'companyname' && e.target.value.trim().length === 0) {
+            errors.companyname = 'Company Name is required!'
+        }
+
+        if (name === 'email' && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)) {
+            errors.email = 'Invalid email address'
+        }
+
+        if (name === 'country') {
+            this.setState({ [e.target.name]: e.target.value });
+        }
+        if (name === 'country' && e.target.value === "") {
+            errors.country = 'Country is required!'
+        }
+        if (name === 'idType') {
+            this.setState({ [e.target.name]: e.target.value });
+        }
+        if (name === 'idType' && e.target.value === "") {
+            errors.idType = 'Id Type is required!'
+        }
+        this.setState({
+            errors
+        })
+    }
+
 
     render() {
         const { isOpen, handleCloseDialog } = this.props
-        const { city,state,country } = this.state
+        const { city, state, country, errors } = this.state
         return (
 
             <Dialog
@@ -60,13 +97,15 @@ class EditGeneralInfoDialogbox extends PureComponent {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="First Name"
+                                    name="firstname"
+                                    label={<span>First Name <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className="text-field-dense"
+                                    onChange={this.handleValidation}
+                                    className={errors.firstname ? "text-field-dense text-error-border" : 'text-field-dense'}
                                     type="text"
-                                    name="fname"
                                 />
+                                {errors.firstname && <div className="validation-error text-right"> Please enter a valid first name </div>}
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
@@ -80,13 +119,15 @@ class EditGeneralInfoDialogbox extends PureComponent {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="Last Name"
+                                    name="lastname"
+                                    label={<span>Last Name <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className="text-field-dense"
+                                    onChange={this.handleValidation}
+                                    className={errors.lastname ? "text-field-dense text-error-border" : 'text-field-dense'}
                                     type="text"
-                                    name="lname"
                                 />
+                                {errors.lastname && <div className="validation-error text-right"> Please enter a valid last name </div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16} className="mrB10">
@@ -96,19 +137,21 @@ class EditGeneralInfoDialogbox extends PureComponent {
                                     margin="dense"
                                     variant="filled"
                                     className="text-field-dense"
-                                    type="text"
                                     name="cname"
+                                    type="text"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={8}>
                                 <TextField
-                                    label="Email Id"
+                                    name="email"
+                                    label={<span>Email id <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className="text-field-dense"
+                                    onChange={this.handleValidation}
+                                    className={errors.email ? "text-field-dense text-error-border" : 'text-field-dense'}
                                     type="email"
-                                    name="email"
                                 />
+                                {errors.email && <div className="validation-error text-right"> Please enter a valid email id </div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16} className="mrB10">
@@ -118,8 +161,8 @@ class EditGeneralInfoDialogbox extends PureComponent {
                                     margin="dense"
                                     variant="filled"
                                     className="text-field-dense"
-                                    type="text"
                                     name="address"
+                                    type="text"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
@@ -159,10 +202,11 @@ class EditGeneralInfoDialogbox extends PureComponent {
                                         <MenuItem value={20}>UP</MenuItem>
                                     </Select>
                                 </FormControl>
+
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    label="ZIP"
+                                    label="Zipcode"
                                     margin="dense"
                                     variant="filled"
                                     className="text-field-dense"
@@ -171,11 +215,11 @@ class EditGeneralInfoDialogbox extends PureComponent {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <FormControl variant="filled" className="select-control">
-                                    <InputLabel htmlFor="filled-country-simple">Country</InputLabel>
+                                <FormControl variant="filled" className={errors.country ? "select-control select-error-border" : "select-control"}>
+                                    <InputLabel htmlFor="filled-country-simple">Country <b>*</b></InputLabel>
                                     <Select
                                         value={country}
-                                        onChange={this.handleChange}
+                                        onChange={this.handleValidation}
                                         input={<FilledInput name="country" id="filled-country-simple" />}
                                         className="select-box"
                                         name="country"
@@ -187,6 +231,7 @@ class EditGeneralInfoDialogbox extends PureComponent {
                                         <MenuItem value={20}>US</MenuItem>
                                     </Select>
                                 </FormControl>
+                                {errors.country && <div className="validation-error text-right"> Please select a country </div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16} className="mrB20">

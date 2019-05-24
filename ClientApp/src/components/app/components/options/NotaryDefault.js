@@ -18,7 +18,7 @@ import SignerTab from "./SignerTab";
 class NotaryDefault extends PureComponent {
     state = {
         value: 0,
-        country:"",
+        county:"",
         checkedB:true
     }
 
@@ -35,35 +35,35 @@ class NotaryDefault extends PureComponent {
     }
 
     render() {
-        const { checkedB, country, value } = this.state
+        const { checkedB, county, value ,checkedA} = this.state
         return (
             <Typography className="tab-container" component="div">
                 <Grid container spacing={16} className="mrB20">
                     <Grid item xs={12} sm={3}>
                         <FormControl className="select-form-control">
                             <InputLabel shrink htmlFor="label-placeholder">
-                                Country
+                                County
                             </InputLabel>
                             <Select
-                                value={country}
+                                value={county}
                                 onChange={this.handleChange}
-                                input={<Input name="country" id="label-placeholder" />}
+                                input={<Input name="county" id="label-placeholder" />}
                                 className="select-box-bootstrap"
-                                name="country"
+                                name="county"
                             >
                                 <MenuItem value={10}>
-                                    Select Country
+                                    Select County
                                 </MenuItem>
-                                <MenuItem value={20}>India</MenuItem>
-                                <MenuItem value={30}>UK</MenuItem>
-                                <MenuItem value={40}>US</MenuItem>
+                                <MenuItem value={20}>county1</MenuItem>
+                                <MenuItem value={30}>county2</MenuItem>
+                                <MenuItem value={40}>county3</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={9} >
                         <div className="checkbox-info d-flex align-items-center">
                             <Checkbox
-                                checked={checkedB}
+                                checked={checkedA}
                                 onChange={this.handleSwitchChange('checkedB')}
                                 value="checkedB"
                                 color="primary"

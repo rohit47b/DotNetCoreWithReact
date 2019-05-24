@@ -114,7 +114,7 @@ class Chat extends PureComponent {
                                         <ClickAwayListener onClickAway={this.handleClose}>
                                             <MenuList className="dropdown-menu-list">
                                                 <MenuItem className="dropdown-menu-list-item" onClick={this.handleClose}><DoneIcon/>Recent Chat</MenuItem>
-                                                <MenuItem className="dropdown-menu-list-item" onClick={this.handleClose}>Unread Chatt</MenuItem>
+                                                <MenuItem className="dropdown-menu-list-item" onClick={this.handleClose}>Unread Chat</MenuItem>
                                                 <MenuItem className="dropdown-menu-list-item" onClick={this.handleClose}>Sort by Name</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>

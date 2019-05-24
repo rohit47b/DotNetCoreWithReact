@@ -209,7 +209,9 @@ color: #CCC;
 /*********************************/
 
 /**************TEXT COLOR***************/
-
+.text-danger{
+    color: $text_danger;
+}
 
 .text-center{text-align: center  !important;}
 .text-left{text-align: left  !important;}
@@ -366,6 +368,12 @@ table{
 }
 .flex-grow-1{
     flex-grow: 1;
+}
+.min-height-60{
+    min-height: 60vh;
+}
+.display-none{
+    display: none;
 }
 
 // created by akshay

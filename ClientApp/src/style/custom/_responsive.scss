@@ -229,9 +229,17 @@
 }
 
 @media (max-width:600px){
-    .header .logo img {
-        max-width: 210px;
-    }
+    .header{
+        .header-toolbar{
+            button{
+                margin-left: 0px;
+            }
+        }
+        .logo img {
+            max-width: 180px;
+        }
+    } 
+   
     .package-details{
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -342,6 +350,12 @@
     .xs-hidden{
         display: none;
     }
+    .icon-chat .fa {
+        font-size: 16px;
+    }
+    .text-center-mb{
+        text-align: center;
+    }
     
 }
 
@@ -408,7 +422,6 @@
     }
     .list-charges{
         .list-charges-items{
-            display: block;
             span{
                 display: block;
             }
@@ -418,6 +431,9 @@
             .info-text{
                 margin-left: 0px !important;
             }
+            .list-charges-title {
+                min-width: 200px;
+            }
         }
     }
     .add-pro-code{
@@ -425,16 +441,22 @@
         text-align: center;
     }  
     .tab-nav .tab-nav-item {
-        min-width: 60px !important;
+        min-width: 70px !important;
         font-size: 12px;
     }
-    .list-notary-charge{
-        .list-charges-items{
-           .currency{
-               margin: 0 !important;
-           }
-        }
+    .table-scroll-x {
+        max-width: 93vw;
     }
+    .card-header{
+        > div
+        {
+            &:nth-child(1){
+                span{
+                    font-size: 12px;
+                }
+            }
+        }
+    } 
 }
 
 @media(max-width:360px){

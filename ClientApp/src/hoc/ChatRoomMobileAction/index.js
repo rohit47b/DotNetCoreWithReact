@@ -2,13 +2,10 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
-import PageviewIcon from '@material-ui/icons/Pageview';
 import FileIcon from '@material-ui/icons/InsertDriveFile';
 import CameraIcon from '@material-ui/icons/CameraAlt';
 import ChatIcon from '@material-ui/icons/Chat';
 import PowerIcon from '@material-ui/icons/PowerSettingsNew';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import Grid from '@material-ui/core/Grid';
 import history from 'customHistory'
 
