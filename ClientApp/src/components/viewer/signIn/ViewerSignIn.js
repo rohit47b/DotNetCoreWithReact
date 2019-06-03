@@ -11,28 +11,42 @@ import history from 'customHistory'
 
 class ViewerSignIn extends PureComponent {
     state = {
-        errors: {}
+        emailError: false,
+        email: '',
     }
 
-    handleValidation = (e) => {
-        let errors = {}
-        let name = e.target.name
-        if (name === 'email' && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)) {
-            errors.email = 'Invalid email address'
+     /** custom validation code  */
+
+     validateEmail(email) {
+        const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+        const result = pattern.test(email);
+        if (result === true) {
+            this.setState({
+                emailError: false,
+                email: email
+            })
         } else {
-            delete errors.email
+            this.setState({
+                emailError: true
+            })
         }
-        if (name === 'propertyAddress' && e.target.value.trim().length === 0) {
-            errors.propertyAddress = 'Property Address is required!'
-        }
-
-        this.setState({
-            errors
-        })
     }
+    
+    handleValidation = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        })
+      
+        if (e.target.name === 'email') {
+            this.validateEmail(e.target.value);
+        }
+    }
+    
+    /** custom validation code end */
 
     render() {
-        const { errors } = this.state
+        const {  email,emailError } = this.state
         return (
             <Grid item xs={12} sm={12} md={6} className="verify-form">
                 <Typography className="mrB20 heading-large" gutterBottom variant="h5" component="h2">
@@ -51,15 +65,16 @@ class ViewerSignIn extends PureComponent {
                                 placeholder="Enter email id"
                                 fullWidth
                                 margin="normal"
-                                className={errors.email ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
+                                className={emailError ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 type="text"
                                 name="email"
                                 onChange={this.handleValidation}
+                                value={email}
                             />
-                            {errors.email && <div className="validation-error text-right"> Please enter a valid email id </div>}
+                            {emailError && <div className="validation-error text-right"> Please enter a valid email id </div>}
                         </Grid>
                     </Grid>
                     <Grid container spacing={16} className="flex-container">

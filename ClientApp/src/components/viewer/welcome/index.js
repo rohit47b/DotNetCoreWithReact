@@ -11,10 +11,35 @@ class Welcome extends PureComponent {
 
     state = {
         open: true,
+        nameError:false,
+        name:''
       };
+
+        /** custom validation code  */
+
+    handleValidation = (e) => {
+      const { name, value } = e.target;
+      this.setState({
+          [name]: value
+      })
+
+      if (name === 'name') {
+          if (value === '' || value === null) {
+              this.setState({
+                nameError: true
+              })
+          } else {
+              this.setState({
+                nameError: false,
+                  [name]: value
+              })
+          }
+      }
+      
+  }
     
     render() {
-        const{open} =this.state
+        const{open,name,nameError} =this.state
         return (
             <Dialog
           open={open}
@@ -30,17 +55,20 @@ class Welcome extends PureComponent {
             <form className="form-join">
             <TextField
                 id="standard-full-width"
-                label="Your Name"
+                label={<span>Your Name <b>*</b></span>}
                 placeholder="Enter your name"
                 fullWidth
                 margin="normal"
-                className="bootstrap-text-field mrB30"
+                className={nameError ? "bootstrap-text-field text-error-border mrB30r" :'bootstrap-text-field mrB30'}
                 InputLabelProps={{
                     shrink: true,
                 }}
                 type="text"
                 name="name"
+                value={name}
+                onChange={this.handleValidation}
             />
+             {nameError && <div className="validation-error text-right mrB10"> Please enter the name</div>}
             <Button className="btn btn-primary btn-block"  onClick={() => history.push('/app/viewer/signing-room')}>Joining Meeting</Button>
                        
             </form>

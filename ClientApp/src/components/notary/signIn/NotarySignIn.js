@@ -13,34 +13,63 @@ import {cloneDeep} from 'lodash'
 class NotarySignIn extends PureComponent {
     state = {
         emailId: 'jstreit@wwnotary.com',
-        errors: {}
+        emailError: false,
+        passwordError:false,
+        password:'',
+        email: '',
     }
 
+    /** custom validation code  */
+
+    validateEmail =(email)=> {
+        const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+        const result = pattern.test(email);
+        if (result === true) {
+            this.setState({
+                emailError: false,
+                email: email
+            })
+        } else {
+            this.setState({
+                emailError: true
+            })
+        }
+    }
+
+    validatePassword =(password) =>{
+        const pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/
+        const result = pattern.test(password);
+        if (result === true) {
+            this.setState({
+                passwordError: false,
+                password: password
+            })
+        } else {
+            this.setState({
+                passwordError: true
+            })
+        }
+    }
+    
     handleValidation = (e) => {
-        let  errors ={}
-        let name = e.target.name
-        if (name === 'email' && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)) {
-            errors.email = 'Invalid email address'
-        } else {
-            delete errors.email
-        }
-
-        if (
-            name === 'password' &&
-            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
-        ) {
-            errors.password = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
-        } else {
-            delete errors.password
-        }
-
+        const { name, value } = e.target;
         this.setState({
-            errors
+            [name]: value
         })
+      
+        if (e.target.name === 'email') {
+            this.validateEmail(e.target.value);
+        }
+    
+        if (e.target.name === 'password') {
+            this.validatePassword(e.target.value);
+        }
     }
+    
+    /** custom validation code end */
 
     render() {
-        const { errors } = this.state
+        const { email,emailError,passwordError,password } = this.state
         return (
             <Grid item xs={12} sm={12} md={6} className="verify-form">
                 <Typography className="mrB20 heading-large" gutterBottom variant="h5" component="h2">
@@ -55,15 +84,16 @@ class NotarySignIn extends PureComponent {
                                 placeholder="Enter email id"
                                 fullWidth
                                 margin="normal"
-                                className={errors.email ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
+                                className={emailError ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 type="text"
                                 name="email"
                                 onChange={this.handleValidation}
+                                value={email}
                             />
-                            {errors.email && <div className="validation-error text-right"> Please enter a valid email id </div>}
+                            {emailError && <div className="validation-error text-right"> Please enter a valid email id </div>}
                         </Grid>
                         <Grid item xs={12} sm={9}>
                             <TextField
@@ -72,15 +102,16 @@ class NotarySignIn extends PureComponent {
                                 placeholder="Enter Password"
                                 fullWidth
                                 margin="normal"
-                                className={errors.password ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
+                                className={passwordError ? "bootstrap-text-field bootstart-text-error-border" : 'bootstrap-text-field'}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 type="password"
                                 name="password"
                                 onChange={this.handleValidation}
+                                value={password}
                             />
-                            {errors.password && <div className="validation-error text-right"> Please enter a valid password </div>}
+                            {passwordError && <div className="validation-error text-right"> Please enter the password </div>}
                         </Grid>
                     </Grid>
 

@@ -12,17 +12,29 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import Paper from '@material-ui/core/Paper'
 
+import ConfirmDialogBox from "hoc/ConfirmDialogBox/ConfirmDialogBox"
 import history from 'customHistory'
 
 class SigningRoomDetails extends PureComponent {
     state = {
         checked: true,
+        openDialog:false
     }
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
     }
+
+      handleClickOpen = () => {
+        this.setState({ openDialog: true });
+      }
+    
+      handleDialogClose = () => {
+        this.setState({ openDialog: false });
+      }
+
     render() {
+        const{openDialog} = this.state
         return (
             <div>
                 <Grid container justify="center" className="top-gray-bg">
@@ -37,7 +49,7 @@ class SigningRoomDetails extends PureComponent {
                                 <Button onClick={() => history.push('/app/eSign-wizard/signing-room')} variant="contained" color="primary" className="btn btn-common btn-gray mrR10">
                                     Back
                                 </Button>
-                                <Button variant="contained" color="primary" className="btn btn-common btn-gray">
+                                <Button onClick={this.handleClickOpen} variant="contained" color="primary" className="btn btn-common btn-gray">
                                     Save & Continue
                                 </Button>
                             </Grid>
@@ -139,6 +151,7 @@ class SigningRoomDetails extends PureComponent {
                         </Card>
                     </Grid>
                 </Grid>
+                <ConfirmDialogBox url={'/app/eSign-wizard/review'} handleDialogClose={this.handleDialogClose} isOpen={openDialog} heading={"Confirmation !"} content={<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>}/>
             </div>
         )
     }

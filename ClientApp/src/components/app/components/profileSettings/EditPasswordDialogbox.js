@@ -19,13 +19,22 @@ import TextField from '@material-ui/core/TextField'
 
 class EditPasswordDialogbox extends PureComponent {
     state = {
-        questions: '',
         name: 'hai',
         labelWidth: 0,
         value: 0,
         showPassword: false,
-        password: '',
-        errors: {}
+        passwordQuestionError:false,
+        passwordError:'',
+        currentPasswordError:false,
+        newPasswordError:false,
+        confirmPasswordError:false,
+        passwordQuestions: '',
+        password:'',
+        currentPassword:'',
+        newPassword:'',
+        confirmPassword:''
+
+       
     }
 
     handleChange = event => {
@@ -40,58 +49,157 @@ class EditPasswordDialogbox extends PureComponent {
         this.setState(state => ({ showPassword: !state.showPassword }));
     }
 
-    // handlePasswordChange = prop => event => {
-    //     this.setState({ [prop]: event.target.value });
-    // };
+    validatePassword =(password) =>{
+        const pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/
+        const result1 = pattern.test(password);
+        if (result1 === true) {
+            this.setState({
+                passwordError: false,
+                password: password,
+               
+            })
+        } else {
+            this.setState({
+                passwordError: true,
+            })
+        }
+
+    }
+
+    validateCurrentPassword =(currentPassword) =>{
+        const pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/
+        const result = pattern.test(currentPassword);
+
+        if (result === true) {
+            this.setState({
+                currentPasswordError:false,
+                currentPassword:currentPassword
+            })
+        } else {
+            this.setState({
+                currentPasswordError: true
+            })
+        }
+    }
+
+    validateNewPassword =(newPassword) =>{
+        const pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/
+        const result = pattern.test(newPassword);
+        
+        if (result === true) {
+            this.setState({
+                newPasswordError:false,
+                newPassword:newPassword
+            })
+        } else {
+            this.setState({
+                newPasswordError: true
+            })
+        }
+    }
+
+    validateConfirmPassword =(confirmPassword) =>{
+        const pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/
+        const result = pattern.test(confirmPassword);
+
+        if (result === true) {
+            this.setState({
+                confirmPasswordError:false,
+                confirmPassword:confirmPassword
+            })
+        } else {
+            this.setState({
+                confirmPasswordError: true
+            })
+        }
+    }
+
+
+       /** custom validation code  */
 
     handleValidation = (e) => {
-        let errors = {}
-        let name = e.target.name
-       
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        })
 
-        if (name === 'questions') {
-            this.setState({ [e.target.name]: e.target.value });
+        if (name === 'passwordQuestions') {
+            if (value === '' || value === null) {
+                this.setState({
+                    passwordQuestionError: true
+                })
+            } else {
+                this.setState({
+                    passwordQuestionError: false,
+                    [name]: value
+                })
+            }
         }
-        if (name === 'questions' && e.target.value === "") {
-            errors.questions = 'Password questions is required!'
-        }
-        if (
-            name === 'password' &&
-            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
-        ) {
-            errors.password = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
-        }
-
-        if (
-            name === 'currentPassword' &&
-            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
-        ) {
-            errors.currentPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
-        }
-
-        if (
-            name === 'newPassword' &&
-            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
-        ) {
-            errors.newPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
-        }
-        if (
-            name === 'confirmPassword' &&
-            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
-        ) {
-            errors.confirmPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+    
+        if (e.target.name === 'password') {
+            this.validatePassword(e.target.value);
         }
         
-        this.setState({
-            errors
-        })
+        if (e.target.name === 'currentPassword') {
+            this.validateCurrentPassword(e.target.value);
+        }
+        if (e.target.name === 'newPassword') {
+            this.validateNewPassword(e.target.value);
+        }
+        if (e.target.name === 'confirmPassword') {
+            this.validateConfirmPassword(e.target.value);
+        }
     }
+    
+    /** custom validation code end */
+
+    // handleValidation = (e) => {
+    //     let errors = {}
+    //     let name = e.target.name
+       
+
+    //     if (name === 'questions') {
+    //         this.setState({ [e.target.name]: e.target.value });
+    //     }
+    //     if (name === 'questions' && e.target.value === "") {
+    //         errors.questions = 'Password questions is required!'
+    //     }
+    //     if (
+    //         name === 'password' &&
+    //         !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+    //     ) {
+    //         errors.password = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+    //     }
+
+    //     if (
+    //         name === 'currentPassword' &&
+    //         !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+    //     ) {
+    //         errors.currentPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+    //     }
+
+    //     if (
+    //         name === 'newPassword' &&
+    //         !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+    //     ) {
+    //         errors.newPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+    //     }
+    //     if (
+    //         name === 'confirmPassword' &&
+    //         !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$&+,:;=?@#|'"`<>.^*()%!-~/])[A-Za-z\d$&+,:;=?@#|'"`<>.^*()%!-~/]{8,}$/i.test(e.target.value)
+    //     ) {
+    //         errors.confirmPassword = 'Password is not strong (Minimum eight characters, at least one letter, one number and one special character.)'
+    //     }
+        
+    //     this.setState({
+    //         errors
+    //     })
+    // }
 
 
     render() {
         const { isOpen, handleCloseDialog } = this.props
-        const { questions,errors } = this.state
-        console.log('password',errors)
+        const {passwordQuestions,password,currentPassword,newPassword,confirmPassword,passwordQuestionError,passwordError,currentPasswordError,newPasswordError,confirmPasswordError } = this.state
         return (
 
             <Dialog
@@ -111,14 +219,14 @@ class EditPasswordDialogbox extends PureComponent {
                         <Grid container spacing={16} className="mrB30">
                             <Grid item xs={12} sm={12}>
                                 <label className="custom-label mrB10">Security Questions</label>
-                                <FormControl variant="filled"  className={errors.questions ? "select-control select-error-border" : "select-control"}>
+                                <FormControl variant="filled"  className={passwordQuestionError ? "select-control select-error-border" : "select-control"}>
                                     <InputLabel htmlFor="filled-questions-simple">Password Questions <b>*</b></InputLabel>
                                     <Select
-                                        value={questions}
+                                        value={passwordQuestions}
                                         onChange={this.handleValidation}
                                         input={<FilledInput name="questions" id="filled-questions-simple" />}
                                         className="select-box"
-                                        name="questions"
+                                        name="passwordQuestions"
                                     >
                                         <MenuItem value="">
                                         <em>None</em>
@@ -127,16 +235,16 @@ class EditPasswordDialogbox extends PureComponent {
                                         <MenuItem value={20}>What is your favorite sports game.</MenuItem>
                                     </Select>
                                 </FormControl>
-                                {errors.questions && <div className="validation-error text-right"> Please select a password questions </div>}
+                                {passwordQuestionError && <div className="validation-error text-right"> Please select a password questions </div>}
                             </Grid>
                             <Grid item xs={12} sm={12} className="pdT0">
-                                <FormControl className={errors.password  ? "password-text-field password-error-border" :"password-text-field"}>
+                                <FormControl className={passwordError  ? "password-text-field password-error-border" :"password-text-field"}>
                                     <InputLabel htmlFor="adornment-password">Password <b>*</b></InputLabel>
                                     <Input
                                         name="password"
                                         id="adornment-password"
                                         type={this.state.showPassword ? 'text' : 'password'}
-                                        value={this.state.password}
+                                        value={password}
                                         onChange={this.handleValidation}
                                         endAdornment={
                                             <InputAdornment position="end">
@@ -150,7 +258,7 @@ class EditPasswordDialogbox extends PureComponent {
                                         }
                                     />
                                 </FormControl>
-                                { errors.password && <div className="validation-error text-right"> Please enter the valid password </div>}
+                                { passwordError && <div className="validation-error text-right"> Please enter the password </div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16} className="mrB15">
@@ -160,12 +268,13 @@ class EditPasswordDialogbox extends PureComponent {
                                    label={<span>Current Password <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className={errors.currentPassword ? "text-field-dense text-error-border" :'text-field-dense'}
+                                    className={currentPasswordError ? "text-field-dense text-error-border" :'text-field-dense'}
                                     type="password"
                                     name="currentPassword"
                                     onChange={this.handleValidation}
+                                    value={currentPassword}
                                 />
-                               {errors.currentPassword && <div className="validation-error text-right"> Please enter a current password</div>}
+                               {currentPasswordError && <div className="validation-error text-right"> Please enter a current password</div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16} className="mrB20">
@@ -174,24 +283,26 @@ class EditPasswordDialogbox extends PureComponent {
                                    label={<span>New Password <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className={errors.newPassword ? "text-field-dense text-error-border" :'text-field-dense'}
+                                    className={newPasswordError ? "text-field-dense text-error-border" :'text-field-dense'}
                                     type="password"
                                     name="newPassword"
                                     onChange={this.handleValidation}
+                                    value={newPassword}
                                 />
-                               {errors.newPassword && <div className="validation-error text-right"> Please enter a new password</div>}
+                               {newPasswordError && <div className="validation-error text-right"> Please enter a new password</div>}
                             </Grid>
                             <Grid item xs={12} sm={5} className="pdT0">
                             <TextField
                                    label={<span>Confirm Password <b>*</b></span>}
                                     margin="dense"
                                     variant="filled"
-                                    className={errors.confirmPassword ? "text-field-dense text-error-border" :'text-field-dense'}
+                                    className={confirmPasswordError ? "text-field-dense text-error-border" :'text-field-dense'}
                                     type="password"
                                     name="confirmPassword"
                                     onChange={this.handleValidation}
+                                    value={confirmPassword}
                                 />
-                               {errors.confirmPassword && <div className="validation-error text-right"> Please enter a confirm password</div>}
+                               {confirmPasswordError && <div className="validation-error text-right"> Please enter a confirm password</div>}
                             </Grid>
                         </Grid>
                         <Grid container spacing={16}>
